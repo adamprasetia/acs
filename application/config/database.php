@@ -48,10 +48,17 @@
 $active_group = 'default';
 $active_record = TRUE;
 
+if($_SERVER['HTTP_HOST']=='localhost'){
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
 $db['default']['database'] = 'hms';
+}else{
+$db['default']['hostname'] = '192.168.10.30';
+$db['default']['username'] = 'adam';
+$db['default']['password'] = 'z4mz4m';
+$db['default']['database'] = 'hms';	
+}
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

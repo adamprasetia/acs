@@ -56,7 +56,7 @@ class User extends MY_Controller {
 		$this->pagination->initialize($config);
 		$data['pagination'] = $this->pagination->create_links();
 		
-		$data['total'] = 'Showing '.($offset+1).' to '.($offset+$limit).' of '.number_format($total).' entries';
+		$data['total'] = page_total($offset,$limit,$total);
 		$this->template->display('user',$data);
 	}
 	function _set_rules(){

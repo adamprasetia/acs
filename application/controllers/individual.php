@@ -60,7 +60,7 @@ class Individual extends MY_Controller {
 		$this->pagination->initialize($config);
 		$data['pagination'] = $this->pagination->create_links();
 		
-		$data['total'] = 'Showing '.($offset+1).' to '.($offset+$limit).' of '.number_format($total).' entries';
+		$data['total'] = page_total($offset,$limit,$total);
 		$this->template->display('individual',$data);
 	}
 	function _set_rules(){
@@ -225,6 +225,11 @@ class Individual extends MY_Controller {
 			redirect('individual'.$this->_filter($data));			
 		}
 	}
+	function query(){
+		$data['title'] = 'ACS - Individual Query';
+		$data['breadcrumb'] = 'individual'.$this->_filter();
+		$this->template->display('individual_query',$data);
+	}
 	function _filter($add = array()){
 		$str = '?avenger=1';
 		$data = array('order_column'=>0
@@ -265,6 +270,7 @@ class Individual extends MY_Controller {
 			,'referred'=>0
 			,'drn_number'=>0
 			,'status_verifikasi'=>0
+			,'query'=>0
 		);
 		$result = array_diff_key($data,$add);
 		foreach($result as $r => $val){			
@@ -598,4 +604,44 @@ class Individual extends MY_Controller {
 		$result = $this->mdl_individual->autocomplete($id);
 		echo json_encode($result);
 	}			
+	function query_builder(){
+		$this->load->helper('query_builder');
+
+		$campaign = $this->mdl_campaign->query_builder();
+		$id_type = $this->mdl_individual->query_builder('id_type');
+		$city = $this->mdl_individual->query_builder('city');
+		$curr_brand = $this->mdl_individual->query_builder('brand');
+		$sec_brand = $this->mdl_individual->query_builder('brand_');
+		$source_type = $this->mdl_individual->query_builder('source_type');
+		$status_verifikasi = $this->mdl_individual->query_builder('status_verifikasi');
+
+		$data[] = genSelect('campaign_id','Campaign',$campaign);
+		$data[] = genString('id','Individual ID');
+		$data[] = genString('mop_id','MOP ID');
+		$data[] = genString('firstname','Firstname');
+		$data[] = genString('lastname','Lastname');
+		$data[] = genString('nickname','Nickname');
+		$data[] = genSelect('sex','Sex',array("M"=>"MALE","F"=>"FEMALE"));
+		$data[] = genDate('dob','Day of Birth');
+		$data[] = genSelect('id_type','ID Type',$id_type);
+		$data[] = genString('id_number','ID Number');
+		$data[] = genString('tlp','Telephone');
+		$data[] = genString('email','Email');
+		$data[] = genString('fb','Facebook');
+		$data[] = genString('tw','Twitter');
+		$data[] = genString('address','Address');
+		$data[] = genSelect('city','City',$city);
+		$data[] = genString('pos_code','Pos Code');
+		$data[] = genSelect('brand','Current Brand',$curr_brand);
+		$data[] = genSelect('brand_','Second Brand',$sec_brand);
+		$data[] = genSelect('source_type','Source Type',$source_type);
+		$data[] = genString('source_user','Source User');
+		$data[] = genDate('survey_date','Survey Date');
+		$data[] = genDate('upload_date','Upload Date');
+		$data[] = genDate('entry_date','Entry Date');
+		$data[] = genDate('verifikasi_date','Verification Date');
+		$data[] = genString('referred','Referred by');
+		$data[] = genSelect('status_verifikasi','Status Verification',$status_verifikasi);
+		echo json_encode($data);
+	}
 }

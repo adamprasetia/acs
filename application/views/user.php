@@ -4,41 +4,35 @@
 		<small>User Management</small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><?=anchor('dashboard','Dashboard')?></li>
+		<li><?php echo anchor('dashboard','Dashboard')?></li>
 		<li class="active">Security</li>
 	</ol>
 </section>
 <section class="content">
-	<?=$this->session->flashdata('alert')?>
+	<?php echo $this->session->flashdata('alert')?>
 	<div class="box">
+		<div class="box-header">
+			<?php echo $add_btn?>
+		</div>
 		<div class="box-body">
-			<?=form_open($action,array('class'=>'form-inline'))?>
+			<?php echo form_open($action,array('class'=>'form-inline'))?>
 				<div class="form-group">
-					<?=form_label('Show entries','limit')?>
-					<?=form_dropdown('limit',array('10'=>'10','50'=>'50','100'=>'100'),set_value('limit',$this->input->get('limit')),'onchange="submit()" class="form-control input-sm"')?> 
+					<?php echo form_label('Show entries','limit')?>
+					<?php echo form_dropdown('limit',array('10'=>'10','50'=>'50','100'=>'100'),set_value('limit',$this->input->get('limit')),'onchange="submit()" class="form-control input-sm"')?> 
 				</div>
 				<div class="form-group">
-					<?=form_input(array('name'=>'search','value'=>$this->input->get('search'),'autocomplete'=>'off','placeholder'=>'Search..','onchange=>"submit()"','class'=>'form-control input-sm'))?>
+					<?php echo form_input(array('name'=>'search','value'=>$this->input->get('search'),'autocomplete'=>'off','placeholder'=>'Search..','onchange=>"submit()"','class'=>'form-control input-sm'))?>
 				</div>
-			<?=form_close()?>
+			<?php echo form_close()?>
 			<div class="table-responsive">
-				<table class="table">
-					<?=$table?>
-				</table>
-			</div>
-			<div class="form-inline">
-				<div class="form-group">
-					<?=form_label($total)?>
-				</div>
-				<div class="pull-right">
-					<?=$pagination?>
-				</div>
+				<?php echo $table?>
 			</div>
 		</div>
 		<div class="box-footer">
-			<?=$add_btn?>
-		</div>
+			<?php echo form_label($total,'',array('class'=>'label-footer'))?>
+			<div class="pull-right">
+				<?php echo $pagination?>
+			</div>
+		</div>		
 	</div>
 </section>
-
-

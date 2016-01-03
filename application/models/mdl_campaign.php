@@ -50,6 +50,15 @@ class Mdl_campaign extends CI_Model {
 		}
 		return $data;
 	}
+	function query_builder(){
+		$this->db->order_by('id','asc');
+		$result = $this->db->get($this->tbl_name)->result();
+		$data = array();
+		foreach($result as $r){
+			$data[$r->id] = $r->name;
+		}
+		return $data;
+	}
 	function order(){
 		$order_column = ($this->input->get('order_column')<>''?$this->input->get('order_column'):'start');
 		$order_type = ($this->input->get('order_type')<>''?$this->input->get('order_type'):'desc');

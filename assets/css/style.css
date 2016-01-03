@@ -27,7 +27,9 @@
 	min-width:150px;
 	font-size:12px;
 }
-
+.label-footer{
+    margin:7px 0;
+}
 .jumbotron{
 	text-align:center;
 }
@@ -61,4 +63,7 @@
     width: 100%;
     max-width: 45px;
     height: 45px;
+}
+.box-header{
+	border-bottom : 1px solid #eee
 }

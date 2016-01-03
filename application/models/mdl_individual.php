@@ -39,23 +39,41 @@ class Mdl_individual extends CI_Model {
 		return $data;
 	}
 	function get(){
-		$this->query();
-		$this->order();
-		$this->limit();
-		return $this->db->get($this->tbl_name);
+		if($this->input->get('query')<>''){
+			$order_column = ($this->input->get('order_column')<>''?$this->input->get('order_column'):'id');
+			$order_type = ($this->input->get('order_type')<>''?$this->input->get('order_type'):'asc');
+			$limit = ($this->input->get('limit')<>''?$this->input->get('limit'):'10');
+			$offset = ($this->input->get('offset')<>''?$this->input->get('offset'):'0');
+			return $this->db->query('SELECT * FROM individual where '.$this->input->get('query').' order by '.$order_column.' '.$order_type.' limit '.$offset.','.$limit);
+		}else{
+			$this->query();
+			$this->order();
+			$this->limit();
+			return $this->db->get($this->tbl_name);
+		}
 	}	
 	function get_from_field($field,$val){
 		$this->db->where($field,$val);
 		return $this->db->get($this->tbl_name);	
 	}
 	function count_all(){
-		$this->query();
-		return $this->db->get($this->tbl_name)->num_rows();
+		if($this->input->get('query')<>''){
+			return $this->db->query('SELECT id FROM individual where '.$this->input->get('query'))->num_rows();
+		}else{	
+			$this->query();
+			return $this->db->get($this->tbl_name)->num_rows();
+		}
 	}
 	function export(){
-		$this->query();
-		$this->order();
-		return $this->db->get($this->tbl_name);
+		if($this->input->get('query')<>''){
+			$order_column = ($this->input->get('order_column')<>''?$this->input->get('order_column'):'id');
+			$order_type = ($this->input->get('order_type')<>''?$this->input->get('order_type'):'asc');
+			return $this->db->query('SELECT * FROM individual where '.$this->input->get('query').' order by '.$order_column.' '.$order_type);
+		}else{
+			$this->query();
+			$this->order();
+			return $this->db->get($this->tbl_name);
+		}
 	}
 	function add($data){
 		$id = $this->db->insert($this->tbl_name,$data);
@@ -129,6 +147,17 @@ class Mdl_individual extends CI_Model {
 		$this->db->order_by($id,'asc');
 		$result = $this->db->get($this->tbl_name)->result_array();	
 		$data[''] = '';
+		foreach($result as $r){
+			$data[$r[$id]] = $r[$id];
+		}
+		return $data;
+	}	
+	function query_builder($id){
+		$this->db->select($id);
+		$this->db->group_by($id);
+		$this->db->order_by($id,'asc');
+		$result = $this->db->get($this->tbl_name)->result_array();	
+		$data = array();
 		foreach($result as $r){
 			$data[$r[$id]] = $r[$id];
 		}

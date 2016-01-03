@@ -1,30 +1,31 @@
+<link href="<?php echo base_url('assets/lib/query-builder/css/query-builder.default.min.css')?>" type="text/css" rel="stylesheet"/>
+<link href="<?php echo base_url('assets/lib/query-builder/css/bootstrap-datepicker3.min.css')?>" type="text/css" rel="stylesheet"/>
 <section class="content-header">
 	<h1>
 		Individual Query
 		<small>Custom Adult Smokers Management Selection</small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><?=anchor('dashboard','Dashboard')?></li>
-		<li><?=anchor($breadcrumb,'Individual Management')?></li>
-		<li class="active">Individual Filter</li>
+		<li><?php echo anchor('dashboard','Dashboard')?></li>
+		<li><?php echo anchor($breadcrumb,'Individual Management')?></li>
+		<li class="active">Individual Query</li>
 	</ol>
 </section>
 <section class="content">
 	<div class="well well-sm">
 		<div id="builder"></div>
+		<button class="btn btn-primary btn-sm parse-sql" data-stmt="false"><span class="glyphicon glyphicon-refresh"></span> Generate</button>
+		<div id="result" class="hide">
+			<h3>Query Result</h3>
+			<pre></pre>
+			<a id="get-data" href="#" class="btn btn-success btn-sm" target="_blank"><span class="glyphicon glyphicon-export"></span> Get Data</a>
+		</div>
 	</div>
 </section>
-<button class="btn btn-primary parse-sql" data-stmt="false">SQL</button>
-<div id="result" class="hide">
-	<h3>Output</h3>
-	<pre></pre>
-</div>
-<script> var base_url = "<?=base_url()?>"</script>
-<script src="<?=base_url('../assets/js/jquery-1.11.3.min.js')?>"></script>
-<script src="<?=base_url('../assets/bower_components/bootstrap-select/dist/js/bootstrap-select.min.js')?>"></script>
-<script src="<?=base_url('../assets/bower_components/bootbox/bootbox.js')?>"></script>
-<script src="<?=base_url('../assets/bower_components/jquery-extendext/jQuery.extendext.min.js')?>"></script>
-<script src="<?=base_url('../assets/bower_components/sql-parser/browser/sql-parser.js')?>"></script>
-<script src="<?=base_url('../assets/bower_components/doT/doT.js')?>"></script>
-<script src="<?=base_url('../assets/jquery-querybuilder/dist/js/query-builder.js')?>"></script>
-<script src="<?=base_url('assets/js/qbuilder.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/lib/query-builder/js/bootstrap-datepicker.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/lib/query-builder/js/jQuery.extendext.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/lib/query-builder/js/doT.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/lib/query-builder/js/moment.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/lib/query-builder/js/query-builder.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/qbuilder.js')?>"></script>
+

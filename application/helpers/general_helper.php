@@ -27,6 +27,9 @@ function pag_tmp(){
 	);
 	return $data;
 }
+function page_total($offset,$limit,$total){
+    return 'Showing '.number_format($offset+1).' to '.number_format(($total>$limit?(($offset+$limit)>$total?$total:$offset+$limit):$total)).' of '.number_format($total).' entries';
+}
 function get_age($dob){
     $dob = date("Y-m-d",strtotime($dob));
 
