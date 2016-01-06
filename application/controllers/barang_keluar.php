@@ -22,6 +22,7 @@ class Barang_keluar extends MY_Controller {
 			'barang_name'=>'Nama Barang'
 			,'tanggal'=>'Tanggal'
 			,'banyak'=>'Banyak'
+			,'retur'=>'Retur'
 			,'vendor_name'=>'Vendor'
 			,'operator'=>'Operator'
 			,'keterangan'=>'Keterangan'
@@ -40,6 +41,7 @@ class Barang_keluar extends MY_Controller {
 				,anchor('barang_keluar/edit/'.$r->id.$this->_filter(),$r->barang_name)
 				,format_tanggal($r->tanggal)	
 				,$r->banyak	
+				,$r->retur	
 				,$r->vendor_name	
 				,$r->operator	
 				,$r->keterangan
@@ -65,6 +67,7 @@ class Barang_keluar extends MY_Controller {
 		$this->form_validation->set_rules('barang_id','Barang Name','trim|required');
 		$this->form_validation->set_rules('tanggal','Tanggal','trim|required');
 		$this->form_validation->set_rules('banyak','Banyak','trim|required');
+		$this->form_validation->set_rules('retur','Retur','trim');
 		$this->form_validation->set_rules('vendor_id','Vendor','trim');
 		$this->form_validation->set_rules('operator','Operator','trim');
 		$this->form_validation->set_rules('keterangan','Keterangan','trim');
@@ -75,6 +78,7 @@ class Barang_keluar extends MY_Controller {
 			'barang_id'=>$this->input->post('barang_id')
 			,'tanggal'=>format_tanggal_barat($this->input->post('tanggal'))
 			,'banyak'=>$this->input->post('banyak')
+			,'retur'=>$this->input->post('retur')
 			,'vendor_id'=>$this->input->post('vendor_id')
 			,'operator'=>strtoupper($this->input->post('operator'))
 			,'keterangan'=>strtoupper($this->input->post('keterangan'))
@@ -176,9 +180,10 @@ class Barang_keluar extends MY_Controller {
 		$active_sheet->setCellValue('B1', 'Barang Name');
 		$active_sheet->setCellValue('C1', 'Tanggal');
 		$active_sheet->setCellValue('D1', 'Banyak');
-		$active_sheet->setCellValue('E1', 'Vendor');
-		$active_sheet->setCellValue('F1', 'Operator');
-		$active_sheet->setCellValue('G1', 'Keterangan');
+		$active_sheet->setCellValue('E1', 'Retur');
+		$active_sheet->setCellValue('F1', 'Vendor');
+		$active_sheet->setCellValue('G1', 'Operator');
+		$active_sheet->setCellValue('H1', 'Keterangan');
 		
 		$result = $this->mdl_barang_keluar->export($order_column,$order_type)->result();
 		$i=2;
@@ -188,9 +193,10 @@ class Barang_keluar extends MY_Controller {
 			$active_sheet->setCellValue('C'.$i, PHPExcel_Shared_Date::PHPToExcel(date_to_excel($r->tanggal)));
 			$active_sheet->getStyle('C'.$i)->getNumberFormat()->setFormatCode('dd/mm/yyyy');		   
 			$active_sheet->setCellValue('D'.$i, $r->banyak);
-			$active_sheet->setCellValue('E'.$i, $r->vendor_name);
-			$active_sheet->setCellValue('F'.$i, $r->operator);
-			$active_sheet->setCellValue('G'.$i, $r->keterangan);
+			$active_sheet->setCellValue('E'.$i, $r->retur);
+			$active_sheet->setCellValue('F'.$i, $r->vendor_name);
+			$active_sheet->setCellValue('G'.$i, $r->operator);
+			$active_sheet->setCellValue('H'.$i, $r->keterangan);
 			$i++;
 		}
 

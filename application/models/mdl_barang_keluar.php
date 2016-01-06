@@ -6,10 +6,19 @@ class Mdl_barang_keluar extends CI_Model {
 		parent::__construct();
 	}
 	function query(){
+		$data[] = $this->db->select(array(
+			'barang_keluar.id as id',
+			'barang.name as barang_name',
+			'tanggal',
+			'banyak',
+			'retur',
+			'vendor.name as vendor_name',
+			'operator',
+			'keterangan'
+		));
 		$data[] = $this->search();
 		$data[] = $this->where('campaign_id');
 		$data[] = $this->where_date('tanggal','tanggal');
-		$data[] = $this->db->select(array('barang_keluar.id as id','barang.name as barang_name','tanggal','banyak','vendor.name as vendor_name','operator','keterangan'));
 		$data[] = $this->db->join('vendor','barang_keluar.vendor_id=vendor.id','left');
 		$data[] = $this->db->join('barang','barang_keluar.barang_id=barang.id','left');
 		return $data;
@@ -50,6 +59,11 @@ class Mdl_barang_keluar extends CI_Model {
 		$this->db->where('barang_id',$id);
 		return $this->db->get($this->tbl_name);	
 	}
+	function retur($id){
+		$this->db->select_sum('retur','retur');
+		$this->db->where('barang_id',$id);
+		return $this->db->get($this->tbl_name);	
+	}	
 	function order(){
 		$order_column = ($this->input->get('order_column')<>''?$this->input->get('order_column'):'id');
 		$order_type = ($this->input->get('order_type')<>''?$this->input->get('order_type'):'desc');

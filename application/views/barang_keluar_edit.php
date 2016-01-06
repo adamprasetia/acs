@@ -46,6 +46,11 @@
 				<?=form_input(array('id'=>'keterangan','name'=>'keterangan','class'=>'form-control input-sm','maxlength'=>'50','size'=>'40','autocomplete'=>'off','value'=>set_value('keterangan',(isset($row->keterangan)?$row->keterangan:''))))?>
 				<small><?=form_error('keterangan')?></small>
 			</div>
+			<div class="form-group form-inline">
+				<?=form_label('Retur','retur',array('class'=>'control-label'))?>
+				<?=form_input(array('id'=>'retur','name'=>'retur','class'=>'form-control input-sm','maxlength'=>'50','size'=>'40','autocomplete'=>'off','value'=>set_value('retur',(isset($row->retur)?$row->retur:''))))?>
+				<small><?=form_error('retur')?></small>
+			</div>
 		</div>
 		<div class="box-footer">
 			<button class="btn btn-primary btn-sm" type="submit"><span class="glyphicon glyphicon-save"></span> Save</button>

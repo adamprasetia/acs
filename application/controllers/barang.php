@@ -30,6 +30,7 @@ class Barang extends MY_Controller {
 		}		
 		$heading[] = 'Masuk';
 		$heading[] = 'Keluar';
+		$heading[] = 'Retur';
 		$heading[] = 'Stok';
 		$heading[] = 'Action';
 		$this->table->set_heading($heading);
@@ -38,6 +39,7 @@ class Barang extends MY_Controller {
 		foreach($result as $r){
 			$masuk = $this->mdl_barang_masuk->banyak($r->id)->row()->banyak;	
 			$keluar = $this->mdl_barang_keluar->banyak($r->id)->row()->banyak;	
+			$retur = $this->mdl_barang_keluar->retur($r->id)->row()->retur;	
 			$this->table->add_row(
 				$i++
 				,anchor('barang/edit/'.$r->id.$this->_filter(),$r->name)
@@ -45,7 +47,8 @@ class Barang extends MY_Controller {
 				,$r->campaign_brand	
 				,number_format($masuk)
 				,number_format($keluar)
-				,number_format($masuk-$keluar)
+				,number_format($retur)
+				,number_format($masuk-$keluar+$retur)
 				,anchor('barang/edit/'.$r->id.$this->_filter(),'<span class="glyphicon glyphicon-edit"></span> Edit')
 				."&nbsp;|&nbsp;".anchor('barang/delete/'.$r->id.$this->_filter(),'<span class="glyphicon glyphicon-trash"></span> Delete',array('onclick'=>"return confirm('Are you sure')"))
 			);
