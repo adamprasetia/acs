@@ -623,6 +623,7 @@ class Individual extends MY_Controller {
 		$data[] = genString('nickname','Nickname');
 		$data[] = genSelect('sex','Sex',array("M"=>"MALE","F"=>"FEMALE"));
 		$data[] = genDate('dob','Day of Birth');
+		$data[] = genInteger("DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(dob)), '%Y')+0",'Age');
 		$data[] = genSelect('id_type','ID Type',$id_type);
 		$data[] = genString('id_number','ID Number');
 		$data[] = genString('tlp','Telephone');

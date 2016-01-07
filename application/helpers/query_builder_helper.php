@@ -3,14 +3,21 @@
 function genString($id,$caption){
 	$data = array(
 		'id' => $id,
-		'label' => array('en'=>$caption),
+		'label' => $caption,
 		'type' => 'string',
-		'size' => 50,
-		'unique' => true
+		'size' => 50
 	);
 	return $data;
 }
-
+function genInteger($id,$caption){
+	$data = array(
+		'id' => $id,
+		'label' => $caption,
+		'type' => 'integer',
+		'size' => 50
+	);
+	return $data;
+}
 function genSelect($id,$caption,$values){
 	$data = array(
 		'id' => $id,
