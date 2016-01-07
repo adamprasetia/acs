@@ -23,7 +23,6 @@ $(document).ready(function(){
       url:base_url+'index.php/individual/query_builder_calculate?query='+encodeURI(query),
       type:'post',
       success:function(str){
-        console.log(str);
         $('#query-result-label').html(' Query Result = '+str+' Rows');
       }
     });
