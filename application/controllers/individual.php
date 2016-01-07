@@ -603,7 +603,10 @@ class Individual extends MY_Controller {
 	function autocomplete($id){
 		$result = $this->mdl_individual->autocomplete($id);
 		echo json_encode($result);
-	}			
+	}		
+	function query_builder_calculate(){
+		echo number_format($this->mdl_individual->count_all());
+	}	
 	function query_builder(){
 		$this->load->helper('query_builder');
 
@@ -623,7 +626,7 @@ class Individual extends MY_Controller {
 		$data[] = genString('nickname','Nickname');
 		$data[] = genSelect('sex','Sex',array("M"=>"MALE","F"=>"FEMALE"));
 		$data[] = genDate('dob','Day of Birth');
-		$data[] = genInteger("DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(dob)), '%Y')+0",'Age');
+		$data[] = genInteger("DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(dob)), '%Y')",'Age');
 		$data[] = genSelect('id_type','ID Type',$id_type);
 		$data[] = genString('id_number','ID Number');
 		$data[] = genString('tlp','Telephone');

@@ -19,6 +19,14 @@ $(document).ready(function(){
     var query = res.sql + (res.params ? '\n\n' + JSON.stringify(res.params, undefined, 2) : '');
     $('#get-data').attr('href',base_url+'index.php/individual?query='+fixedEncodeURIComponent(query));
     //console.log(res.sql + (res.params ? '\n\n' + JSON.stringify(res.params, undefined, 2) : ''));
+    $.ajax({
+      url:base_url+'index.php/individual/query_builder_calculate?query='+encodeURI(query),
+      type:'post',
+      success:function(str){
+        console.log(str);
+        $('#query-result-label').html(' Query Result = '+str+' Rows');
+      }
+    });
   });
 
   function fixedEncodeURIComponent (str) {

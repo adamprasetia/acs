@@ -16,7 +16,7 @@
 		<div id="builder"></div>
 		<button class="btn btn-primary btn-sm parse-sql" data-stmt="false"><span class="glyphicon glyphicon-refresh"></span> Generate</button>
 		<div id="result" class="hide">
-			<h3>Query Result</h3>
+			<h3 id="query-result-label">Query Result</h3>
 			<pre></pre>
 			<a id="get-data" href="#" class="btn btn-success btn-sm" target="_blank"><span class="glyphicon glyphicon-export"></span> Get Data</a>
 		</div>

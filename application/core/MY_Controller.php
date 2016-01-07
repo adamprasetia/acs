@@ -44,6 +44,7 @@ class MY_Controller extends CI_Controller {
 						,'query'=>array(1,2,3)
 						,'autocomplete'=>array(1,2,3)
 						,'query_builder'=>array(1,2,3)
+						,'query_builder_calculate'=>array(1,2,3)
 					)
 			,'report_calculate'=>array(
 						'index'=>array(1,2,3)
