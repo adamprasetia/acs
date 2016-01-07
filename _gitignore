@@ -8,5 +8,5 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
-uploads
+uploads/*
 assets/img/user/*
